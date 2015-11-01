@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Tip Calculator</title>
+  </head>
+  <body>
+    <label for="Price">Price:</label>
+    <input type="text" name="Price" value="" id="Price">
+    <ul id="results">
+      <li>
+        <span>5%</span>&nbsp;
+        <span id="5-total"></span>&nbsp;
+        <span id="5-roundup"></span>&nbsp;
+        <span id="5-tip"></span>
+      </span>
+      </li>
+      <li>
+        <span>10%</span>&nbsp;
+        <span id="10-total"></span>&nbsp;
+        <span id="10-roundup"></span>&nbsp;
+        <span id="10-tip"></span>
+      </span>
+      </li>
+      <li>
+        <span>15%</span>&nbsp;
+        <span id="15-total"></span>&nbsp;
+        <span id="15-roundup"></span>&nbsp;
+        <span id="15-tip"></span>
+      </span>
+      </li>
+      <li>
+        <span>20%</span>&nbsp;
+        <span id="20-total"></span>&nbsp;
+        <span id="20-roundup"></span>&nbsp;
+        <span id="20-tip"></span>
+      </span>
+      </li>
+    </ul>
+    
+    <script type="text/javascript" charset="utf-8">
+      //document.getElementById('Price').addEventListener('change', function(e){
+      document.getElementById('Price').addEventListener('keyup', function(e){
+        var price = document.getElementById('Price').value;
+        tip_percents = [5, 10, 15, 20]
+        for (var percent of tip_percents){
+          document.getElementById(percent.toString() + "-tip").textContent = (price * percent/100).toString();
+          //console.log(percent.toString() + "-total")
+          document.getElementById(percent.toString() + "-total").textContent = (price * (1 + percent/100)).toString();
+          document.getElementById(percent.toString() + "-roundup").textContent = Math.round(price * (1 + percent/100)).toString();
+          //document.getElementById(percent.toString() + "-roundup").textContent = round(price * percent/100 + price).toString();
+          //console.log(document.getElementById(percent.toString() + "-tip").textContent = 5)
+        }
+
+      })
+    </script>
+  </body>
+</html>
