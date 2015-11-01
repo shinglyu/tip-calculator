@@ -9,19 +9,19 @@
         font-weight: bold;
       }
       td {
-        padding-right: 1em;
+        padding-right: 0.5em;
+        text-align:right;
       }
       input {
         /*height: 3em;*/
         font-size: 2em;
-        width: ;
+        width: 100%;
       }
-      
     </style>
   </head>
   <body>
     <label for="Price">Price:</label>
-    <input type="text" name="Price" value="" id="Price">
+    <input type="number" name="Price" value="" id="Price">
     <table id="results">
     </table>
     
@@ -29,7 +29,7 @@
       function generateRow(percent){
          var tr = document.createElement('tr');
          var tdtitle = document.createElement('td');
-         tdtitle.textContent = percent.toString() + "%"
+         tdtitle.textContent = percent.toString() + "% ="
 
          var tdtotal = document.createElement('td');
          tdtotal.id = percent.toString() + "-total"
@@ -51,20 +51,19 @@
       function roundToTwoDigit(num){
         return Math.round(num * 100)/100.0
       }
-      var tip_percents = [5, 10, 15, 20]
+      var tip_percents = [5, 10, 15, 18, 20]
       for (var percent of tip_percents){
         generateRow(percent);
       }
       document.getElementById('Price').addEventListener('keyup', function(e){
         var price = document.getElementById('Price').value;
-        tip_percents = [5, 10, 15, 20]
         for (var percent of tip_percents){
-          document.getElementById(percent.toString() + "-total").textContent = (price * (1 + percent/100)).toFixed(2);
+          document.getElementById(percent.toString() + "-total").textContent = (price * (1 + percent/100)).toFixed(2) + " \u2248";
+          //var roundup = Math.ceil(price * (1 + percent/100))
           var roundup = Math.ceil(price * (1 + percent/100))
-          document.getElementById(percent.toString() + "-roundup").textContent = roundup.toFixed(0);
+          document.getElementById(percent.toString() + "-roundup").textContent =  + roundup.toFixed(0);
           document.getElementById(percent.toString() + "-tip-roundup").textContent = "(" + (roundup - price).toFixed(2) + ")";
         }
-
       })
     </script>
   </body>

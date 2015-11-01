@@ -1,0 +1,13 @@
+{
+    "name": "Tip Calculator",
+      "description": "Help you calculate the tip",
+        "launch_path": "/index.html",
+        "icons": {
+            "128": "/img/icon-128.png"
+        },
+        "developer": {
+            "name": "Shing Lyu",
+            "url": "https://shinglyu.github.io/"
+        },
+          "default_locale": "en"
+}
