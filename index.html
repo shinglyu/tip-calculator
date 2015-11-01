@@ -21,7 +21,7 @@
   </head>
   <body>
     <label for="Price">Price:</label>
-    <input type="number" name="Price" value="" id="Price">
+    <input type="tel" name="Price" value="" id="Price">
     <table id="results">
     </table>
     
@@ -48,15 +48,27 @@
          document.getElementById('results').appendChild(tr)
          console.log(tdtotal)
       }
+      /*
       function roundToTwoDigit(num){
         return Math.round(num * 100)/100.0
       }
-      var tip_percents = [5, 10, 15, 18, 20]
+      */
+      function sum(str){
+        console.log(str)
+        var numbers = str.split('+')
+        console.log(numbers)
+        return numbers.reduce(function(accu, thisval){
+          console.log(accu)
+          console.log(thisval)
+          return Number(accu) + Number(thisval);
+        });
+      }
+      var tip_percents = [0, 5, 10, 15, 18, 20]
       for (var percent of tip_percents){
         generateRow(percent);
       }
       document.getElementById('Price').addEventListener('keyup', function(e){
-        var price = document.getElementById('Price').value;
+        var price = sum(document.getElementById('Price').value);
         for (var percent of tip_percents){
           document.getElementById(percent.toString() + "-total").textContent = (price * (1 + percent/100)).toFixed(2) + " \u2248";
           //var roundup = Math.ceil(price * (1 + percent/100))
@@ -65,6 +77,14 @@
           document.getElementById(percent.toString() + "-tip-roundup").textContent = "(" + (roundup - price).toFixed(2) + ")";
         }
       })
+      /* 
+      TODO:
+       * Split
+         * Round by person
+         * Round by total
+       * Tax
+       * Summation
+      */
     </script>
   </body>
 </html>
