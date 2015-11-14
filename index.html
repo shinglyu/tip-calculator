@@ -17,6 +17,10 @@
         font-size: 2em;
         width: 100%;
       }
+      button {
+        font-size:2.2em;
+        width: 22vw; 
+      }
     </style>
   </head>
   <body>
@@ -24,6 +28,26 @@
     <input type="text" name="Price" value="" id="Price">
     <table id="results">
     </table>
+    <button id="b1">1</button>
+    <button id="b2">2</button>
+    <button id="b3">3</button>
+    <button id="clear">C</button>
+    <br>
+    <button id="b4">4</button>
+    <button id="b5">5</button>
+    <button id="b6">6</button>
+    <button id="back">&lt;</button>
+    <br>
+    <button id="b7">7</button>
+    <button id="b8">8</button>
+    <button id="b9">9</button>
+    <button id="b+">+</button>
+    <br>
+    <span style="width:22vw;display:inline-block;"></span>
+    <button id="b0">0</button>
+    <span style="width:22vw;display:inline-block;"></span>
+    <button id="b.">.</button>
+
     
     <script type="text/javascript" charset="utf-8">
       function generateRow(percent){
@@ -67,7 +91,8 @@
       for (var percent of tip_percents){
         generateRow(percent);
       }
-      document.getElementById('Price').addEventListener('keyup', function(e){
+
+      function calculate(){
         var price = sum(document.getElementById('Price').value);
         for (var percent of tip_percents){
           document.getElementById(percent.toString() + "-total").textContent = (price * (1 + percent/100)).toFixed(2) + " \u2248";
@@ -76,6 +101,30 @@
           document.getElementById(percent.toString() + "-roundup").textContent =  + roundup.toFixed(0);
           document.getElementById(percent.toString() + "-tip-roundup").textContent = "(" + (roundup - price).toFixed(2) + ")";
         }
+
+      }
+      window.addEventListener('load', function(e){
+        document.getElementById('Price').addEventListener('keyup', function(e){
+          calculate();
+        })
+
+       var buttons = [0,1,2,3,4,5,6,7,8,9,"+","."]
+       for (var n in buttons){
+          console.log("b" + buttons[n].toString())
+          console.log(document.getElementById("b" + buttons[n].toString()))
+          document.getElementById("b" + buttons[n].toString()).addEventListener('click', function(e){
+            document.getElementById('Price').value += e.target.textContent;
+            calculate();
+          })
+        }
+      })
+      document.getElementById("back").addEventListener('click', function(e){
+        document.getElementById('Price').value = document.getElementById('Price').value.slice(0, -1)
+        calculate();
+      })
+      document.getElementById("clear").addEventListener('click', function(e){
+        document.getElementById('Price').value = "";
+        calculate();
       })
       /* 
       TODO:
