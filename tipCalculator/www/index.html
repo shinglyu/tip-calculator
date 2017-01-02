@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Tip Calculator</title>
+    <style type="text/css" media="screen">
+      body {
+        overflow: hidden;
+      }
+      .roundup {
+        font-weight: bold;
+      }
+      td {
+        padding-right: 0.5em;
+        text-align:right;
+      }
+      input {
+        /*height: 3em;*/
+        font-size: 2em;
+        width: 90vw;
+      }
+      .divs > div {
+        display: inline-block;
+        text-align: center;
+        font-size: 8vh;
+        width: 22vw; 
+        background-color: #424242;
+      }
+      .divs {
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+        padding-bottom: 0.5em;
+        background-color: #424242;
+        color: white;
+        width: 100vw;
+      }
+      .clear, .back, .b+, .b0, .b. {
+        background-color: #9e9e9e;
+      }
+    </style>
+  </head>
+  <body>
+    <label for="Price">Price:</label>
+    <input type="text" name="Price" value="" id="Price">
+    <table id="results">
+    </table>
+    <div class="divs">
+      <div id="b1">1</div>
+      <div id="b2">2</div>
+      <div id="b3">3</div>
+      <div id="clear">C</div>
+      <br>
+      <div id="b4">4</div>
+      <div id="b5">5</div>
+      <div id="b6">6</div>
+      <div id="back">&#x232b;</div>
+      <br>
+      <div id="b7">7</div>
+      <div id="b8">8</div>
+      <div id="b9">9</div>
+      <div id="b+">+</div>
+      <br>
+      <div style="width:22vw;display:inline-block;"></div>
+      <div id="b0">0</div>
+      <div id="b.">.</div>
+      <div style="width:22vw;display:inline-block;"></div>
+    </div>
+
+    
+    <script type="text/javascript" charset="utf-8">
+      function generateRow(percent){
+         var tr = document.createElement('tr');
+         var tdtitle = document.createElement('td');
+         tdtitle.textContent = percent.toString() + "% ="
+
+         var tdtotal = document.createElement('td');
+         tdtotal.id = percent.toString() + "-total"
+
+         var tdroundup= document.createElement('td');
+         tdroundup.id = percent.toString() + "-roundup"
+         tdroundup.className += "roundup"
+
+         var tdtipup= document.createElement('td');
+         tdtipup.id = percent.toString() + "-tip-roundup"
+         
+         tr.appendChild(tdtitle)
+         tr.appendChild(tdtotal)
+         tr.appendChild(tdroundup)
+         tr.appendChild(tdtipup)
+         document.getElementById('results').appendChild(tr)
+         console.log(tdtotal)
+      }
+      /*
+      function roundToTwoDigit(num){
+        return Math.round(num * 100)/100.0
+      }
+      */
+      function sum(str){
+        console.log(str)
+        var numbers = str.split('+')
+        console.log(numbers)
+        return numbers.reduce(function(accu, thisval){
+          console.log(accu)
+          console.log(thisval)
+          return Number(accu) + Number(thisval);
+        });
+      }
+      var tip_percents = [0, 5, 10, 15, 18, 20]
+      for (var percent of tip_percents){
+        generateRow(percent);
+      }
+
+      function calculate(){
+        var price = sum(document.getElementById('Price').value);
+        for (var percent of tip_percents){
+          document.getElementById(percent.toString() + "-total").textContent = (price * (1 + percent/100)).toFixed(2) + " \u2248";
+          //var roundup = Math.ceil(price * (1 + percent/100))
+          var roundup = Math.ceil(price * (1 + percent/100))
+          document.getElementById(percent.toString() + "-roundup").textContent =  + roundup.toFixed(0);
+          document.getElementById(percent.toString() + "-tip-roundup").textContent = "(+" + (roundup - price).toFixed(2) + ")";
+        }
+
+      }
+      window.addEventListener('load', function(e){
+        document.getElementById('Price').addEventListener('keyup', function(e){
+          calculate();
+        })
+
+       var divs = [0,1,2,3,4,5,6,7,8,9,"+","."]
+       for (var n in divs){
+          console.log("b" + divs[n].toString())
+          console.log(document.getElementById("b" + divs[n].toString()))
+          document.getElementById("b" + divs[n].toString()).addEventListener('click', function(e){
+            document.getElementById('Price').value += e.target.textContent;
+            calculate();
+          })
+        }
+      })
+      document.getElementById("back").addEventListener('click', function(e){
+        document.getElementById('Price').value = document.getElementById('Price').value.slice(0, -1)
+        calculate();
+      })
+      document.getElementById("clear").addEventListener('click', function(e){
+        document.getElementById('Price').value = "";
+        calculate();
+      })
+      /* 
+      TODO:
+       * Split
+         * Round by person
+         * Round by total
+       * Tax
+       * Summation
+      */
+    </script>
+  </body>
+</html>
