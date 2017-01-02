@@ -36,7 +36,7 @@
     <button id="b4">4</button>
     <button id="b5">5</button>
     <button id="b6">6</button>
-    <button id="back">&lt;</button>
+    <button id="back">&larr;</button>
     <br>
     <button id="b7">7</button>
     <button id="b8">8</button>
@@ -99,7 +99,7 @@
           //var roundup = Math.ceil(price * (1 + percent/100))
           var roundup = Math.ceil(price * (1 + percent/100))
           document.getElementById(percent.toString() + "-roundup").textContent =  + roundup.toFixed(0);
-          document.getElementById(percent.toString() + "-tip-roundup").textContent = "(" + (roundup - price).toFixed(2) + ")";
+          document.getElementById(percent.toString() + "-tip-roundup").textContent = "(+" + (roundup - price).toFixed(2) + ")";
         }
 
       }
