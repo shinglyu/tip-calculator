@@ -2,7 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <link rel="manifest" href="manifest.json" />
     <title>Tip Calculator</title>
     <style type="text/css" media="screen">
       body {
@@ -24,7 +25,7 @@
         display: inline-block;
         text-align: center;
         font-size: 8vh;
-        width: 22vw; 
+        width: 22vw;
         background-color: #424242;
       }
       .divs {
@@ -68,7 +69,7 @@
       <div style="width:22vw;display:inline-block;"></div>
     </div>
 
-    
+   
     <script type="text/javascript" charset="utf-8">
       function generateRow(percent){
          var tr = document.createElement('tr');
@@ -84,7 +85,7 @@
 
          var tdtipup= document.createElement('td');
          tdtipup.id = percent.toString() + "-tip-roundup"
-         
+        
          tr.appendChild(tdtitle)
          tr.appendChild(tdtotal)
          tr.appendChild(tdroundup)
@@ -146,7 +147,7 @@
         document.getElementById('Price').value = "";
         calculate();
       })
-      /* 
+      /*
       TODO:
        * Split
          * Round by person
