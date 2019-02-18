@@ -69,7 +69,6 @@
       <div style="width:22vw;display:inline-block;"></div>
     </div>
 
-   
     <script type="text/javascript" charset="utf-8">
       function generateRow(percent){
          var tr = document.createElement('tr');
@@ -85,7 +84,7 @@
 
          var tdtipup= document.createElement('td');
          tdtipup.id = percent.toString() + "-tip-roundup"
-        
+
          tr.appendChild(tdtitle)
          tr.appendChild(tdtotal)
          tr.appendChild(tdroundup)
@@ -147,6 +146,10 @@
         document.getElementById('Price').value = "";
         calculate();
       })
+
+      navigator.serviceWorker && navigator.serviceWorker.register('./sw.js').then(function(registration) {
+        console.log('ServiceWorker registered with scope: ', registration.scope);
+      });
       /*
       TODO:
        * Split
