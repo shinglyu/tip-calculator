@@ -3,6 +3,8 @@
   "short_name": "TipCalc",
   "display": "standalone",
   "start_url": "/tip-calculator/",
+  "background_color": "#00CECB",
+  "theme_color": "#FFED66",
   "icons": [
     {
       "src": "img/icon-192.png",
