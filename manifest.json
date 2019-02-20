@@ -1,6 +1,7 @@
 {
   "name": "Tip Calculator",
   "short_name": "TipCalc",
+  "description": "A tip calculator that will show you all common percentages with round-up"
   "display": "standalone",
   "start_url": "/tip-calculator/",
   "background_color": "#00CECB",
